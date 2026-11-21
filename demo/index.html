@@ -41,6 +41,34 @@ h2{font-size:36px;margin-bottom:16px}
 .top nav{display:flex;gap:22px;font-size:15px}
 .top nav a{color:var(--ink-2);text-decoration:none}
 .top nav a:hover{color:var(--orange-d)}
+.top-right{display:flex;align-items:center;gap:22px}
+.top-cta{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;background:var(--orange);color:#fff;font-weight:600;font-size:14px;text-decoration:none;white-space:nowrap}
+.top-cta:hover{background:var(--orange-d)}
+
+/* problem story */
+.story{font-family:Sora,Inter,sans-serif;font-size:26px;line-height:1.4;letter-spacing:-0.01em;max-width:820px;margin-bottom:22px}
+.story span{color:var(--orange-d)}
+.stakes{margin-top:28px;font-size:19px;font-weight:600;color:var(--ink)}
+
+/* video */
+.video{position:relative;aspect-ratio:16/9;border-radius:18px;background:var(--ink);display:grid;place-items:center;text-align:center;color:#D6D3D1;overflow:hidden}
+.video .play{width:76px;height:76px;border-radius:50%;background:var(--orange);display:grid;place-items:center;margin:0 auto 16px}
+.video .play svg{width:30px;height:30px;fill:#fff;margin-left:5px}
+.video p{font-size:15px}
+.video-cap{margin-top:14px;color:var(--muted);font-size:15px}
+
+/* measures */
+.measure{margin-top:40px;border:1px solid var(--line);border-radius:16px;padding:30px;background:var(--soft)}
+.measure h3{font-size:21px;margin-bottom:10px}
+.measure p{color:var(--ink-2)}
+.measure ul{margin:16px 0;padding-left:20px;color:var(--ink-2)}
+.measure li+li{margin-top:6px}
+.price{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-weight:600}
+
+/* contact */
+.contact{margin-top:32px;display:grid;gap:10px;font-size:18px}
+.contact .name{font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:#fff}
+.contact a{color:#FDBA74}
 
 /* hero */
 .hero{padding:96px 0 88px;border-top:0;background:linear-gradient(180deg,var(--warm),#fff 70%)}
@@ -169,6 +197,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   h2{font-size:28px}
   .grid-2,.grid-4{grid-template-columns:1fr}
   .top nav{display:none}
+  .top .wrap{padding:0 16px}
+  .brand{font-size:17px;gap:8px}
+  .top-cta{font-size:13px;padding:0 12px}
+  .story{font-size:21px}
   .step{grid-template-columns:56px 1fr;gap:14px}
   .num{width:56px;font-size:13px}
   .step::before{left:27px}
@@ -183,12 +215,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 5 L55.4 18.5 L55.4 45.5 L32 59 L8.6 45.5 L8.6 18.5 Z" fill="none" stroke="#1C1917" stroke-width="5" stroke-linejoin="round"/><path d="M32 17 Q34 30 47 32 Q34 34 32 47 Q30 34 17 32 Q30 30 32 17 Z" fill="#EA580C"/></svg>
       <span>Awetom<b>AI</b>tion</span>
     </a>
-    <nav aria-label="Sections">
-      <a href="#problem">The problem</a>
-      <a href="#how">How it works</a>
-      <a href="#headoffice">Head office view</a>
-      <a href="#plan">Pilot plan</a>
-    </nav>
+    <div class="top-right">
+      <nav aria-label="Sections">
+        <a href="#problem">The problem</a>
+        <a href="#how">How it works</a>
+        <a href="#headoffice">Head office view</a>
+        <a href="#plan">Pilot plan</a>
+      </nav>
+      <a class="top-cta" href="https://wa.me/917386463183">Book a 20-minute call</a>
+    </div>
   </div>
 </header>
 
@@ -199,7 +234,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   <div class="wrap">
     <p class="eyebrow">Solution walkthrough · Multi-centre preschools &amp; daycares</p>
     <h1>Every admission enquiry answered, followed up and <span>visible</span>.</h1>
-    <p class="lead">An automated enquiry follow-up system for preschool and daycare chains. Parents get a reply within a minute, centres get a clear prompt to call, nothing goes quiet without someone noticing, and head office sees every enquiry across every centre in one place.</p>
+    <p class="lead">An automated enquiry follow-up system for preschool and daycare chains. Parents get a reply, usually within a minute in our tests; centres get a clear prompt to call, nothing goes quiet without someone noticing, and head office sees every enquiry across every centre in one place.</p>
     <div class="tags" aria-label="Key facts">
       <span class="tag">Built on Microsoft 365 &amp; Power Automate</span>
       <span class="tag">No new app for staff</span>
@@ -216,33 +251,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 <!-- PROBLEM -->
 <section id="problem">
   <div class="wrap">
-    <div class="sec-intro">
-      <p class="eyebrow">The problem</p>
-      <h2>Every enquiry is a potential admission, but follow-up depends on memory.</h2>
-      <p class="lead">Parents find the school online and request a visit through the website. From there, each centre has to call back, arrange a visit and turn it into an admission, and today that relies on people remembering.</p>
-    </div>
-    <div class="grid-4">
-      <div class="card">
-        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-        <h3>Parents wait</h3>
-        <p>A parent may wait hours for a reply, or not hear back at all, while comparing other schools.</p>
-      </div>
-      <div class="card">
-        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
-        <h3>Speed isn't measured</h3>
-        <p>Nobody tracks how quickly enquiries are answered, so there's nothing to improve against.</p>
-      </div>
-      <div class="card">
-        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="7" height="7" rx="1.5"/><rect x="14" y="4" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
-        <h3>No single view</h3>
-        <p>Head office can't see enquiries across centres and cities in one place.</p>
-      </div>
-      <div class="card">
-        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9L2.4 18a2 2 0 001.7 3h15.8a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg></div>
-        <h3>Silent losses</h3>
-        <p>Enquiries that go quiet are lost revenue, and nobody can see that they've been lost.</p>
-      </div>
-    </div>
+    <p class="eyebrow">The problem</p>
+    <p class="story">It's 9 pm. A mother fills in your <span>Request a Visit</span> form. Tomorrow morning, will someone call her? How soon? Would anyone know if nobody did?</p>
+    <p class="lead">In most preschools, follow-up depends on someone remembering. Parents wait without a reply, head office can't see response times across centres, and enquiries that go quiet are simply lost.</p>
+    <p class="stakes">Every unanswered enquiry can be a lost admission, and with it a year of fees.</p>
     <p class="quote">The goal: <span>no enquiry goes quiet without someone knowing.</span></p>
   </div>
 </section>
@@ -259,8 +271,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       <div class="step">
         <div class="num">01</div>
         <div>
-          <span class="when">Within a minute</span>
-          <h3>Instant reply to the parent</h3>
+          <span class="when">Usually within a minute in our tests</span>
+          <h3>Fast reply to the parent</h3>
           <p>As soon as the enquiry arrives, the parent receives an email with the centre's address, a map link and phone number, so they know they've been heard.</p>
         </div>
       </div>
@@ -268,8 +280,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
         <div class="num">02</div>
         <div>
           <span class="when">At the same time</span>
-          <h3>Centre alert with an "I'll call" button</h3>
-          <p>The right centre gets an email with the parent's details. One click on "I'll call" records exactly when the parent was first contacted.</p>
+          <h3>Centre alert</h3>
+          <p>The centre gets an email with the parent's details and an "I'll call" button. One click marks the enquiry as taken and records when the centre took it, so head office can see how quickly every enquiry was picked up.</p>
         </div>
       </div>
       <div class="step">
@@ -300,6 +312,24 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   </div>
 </section>
 
+<!-- DEMO VIDEO -->
+<section id="video">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="eyebrow">Demo</p>
+      <h2>See it in 2 minutes</h2>
+    </div>
+    <!-- To add the video later: replace this .video block with an embed, e.g. a YouTube "unlisted" video iframe. -->
+    <div class="video" role="img" aria-label="Demo video placeholder: 2-minute demo, to be added">
+      <div>
+        <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg></div>
+        <p>2-minute demo, to be added</p>
+      </div>
+    </div>
+    <p class="video-cap">One parent's enquiry, from the form to a booked visit. The demo uses invented parents and data.</p>
+  </div>
+</section>
+
 <!-- WHAT PEOPLE SEE -->
 <section id="see">
   <div class="wrap">
@@ -317,8 +347,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
             <p>Thank you for your interest in our Indiranagar centre. Our team will call you shortly to arrange a visit.</p>
             <div class="info">
               <strong>Centre address</strong><br>
-              [Centre address]<br>
-              <strong>Phone</strong> [Centre phone]
+              2nd Floor, Lakeview Plaza, Main Road, Pune 411028<br>
+              <strong>Phone</strong> +91 20 4000 0000
             </div>
             <div class="mail-btns">
               <span class="fake-btn fb-dark">Open in Maps</span>
@@ -337,7 +367,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
               <strong>Parent</strong> Ananya R.<br>
               <strong>Child's age</strong> 2 years 8 months<br>
               <strong>Interested in</strong> Preschool · Daycare<br>
-              <strong>Phone</strong> [Parent phone]<br>
+              <strong>Phone</strong> +91 98000 12345<br>
               <strong>Received</strong> 10:42 AM
             </div>
             <div class="mail-btns">
@@ -367,17 +397,17 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
         <p>Gets the enquiry first and clicks "I'll call".</p>
       </div>
       <div class="rung">
-        <p class="t">Level 2 · after time limit A</p>
+        <p class="t">Level 2 · e.g. after 2 hours</p>
         <h3>City lead</h3>
         <p>Alerted if the centre hasn't responded in time.</p>
       </div>
       <div class="rung">
-        <p class="t">Level 3 · after time limit B</p>
+        <p class="t">Level 3 · e.g. after 8 hours</p>
         <h3>Head office</h3>
         <p>Alerted if the enquiry is still untouched.</p>
       </div>
     </div>
-    <p class="note">The school chooses the time limits, and they can be different for each level.</p>
+    <p class="note">You choose the time limits.</p>
   </div>
 </section>
 
@@ -394,7 +424,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
         <table>
           <caption style="position:absolute;left:-9999px">Example enquiry log with sample data</caption>
           <thead>
-            <tr><th scope="col">Parent</th><th scope="col">Centre</th><th scope="col">City</th><th scope="col">Received</th><th scope="col">First contact</th><th scope="col">Status</th></tr>
+            <tr><th scope="col">Parent</th><th scope="col">Centre</th><th scope="col">City</th><th scope="col">Received</th><th scope="col">Taken by centre</th><th scope="col">Status</th></tr>
           </thead>
           <tbody>
             <tr><td>Ananya R.</td><td>Indiranagar</td><td>Bengaluru</td><td>10:42 AM</td><td>18 min</td><td><span class="pill p-green">Visit booked</span></td></tr>
@@ -420,7 +450,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     <div class="grid-4">
       <div class="card role">
         <h3>Parents</h3>
-        <ul><li>A reply within a minute</li><li>Centre address, map and phone</li><li>Visit confirmation and reminder</li></ul>
+        <ul><li>A reply, usually within a minute in our tests</li><li>Centre address, map and phone</li><li>Visit confirmation and reminder</li></ul>
       </div>
       <div class="card role">
         <h3>Centre staff</h3>
@@ -469,6 +499,17 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       <div class="phase"><div class="k">2</div><h3>Pilot</h3><p>Run it live at one or two centres. Track response times and visits in the enquiry log.</p></div>
       <div class="phase"><div class="k">3</div><h3>Review and roll out</h3><p>Review the pilot results together, adjust, then extend to every centre and city.</p></div>
     </div>
+    <div class="measure">
+      <h3>What we measure</h3>
+      <p>We record how quickly enquiries are picked up for two weeks before go-live, then during the pilot, so you see the difference in your own numbers:</p>
+      <ul>
+        <li>Median time from enquiry to the centre taking it</li>
+        <li>Share of enquiries picked up within your time limit</li>
+        <li>Visits booked per 100 enquiries</li>
+      </ul>
+      <p>At the end, you decide whether to roll out to more centres, using these results.</p>
+      <p class="price">Fixed-price pilot, no long contract. [Price to be added]</p>
+    </div>
   </div>
 </section>
 
@@ -490,10 +531,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 <!-- CLOSING -->
 <section class="closing">
   <div class="wrap">
-    <h2>Next step: a pilot at one or two centres.</h2>
-    <p class="lead" style="margin-top:12px">Let's agree the pilot centres and time limits, and get the first enquiries flowing through the system.</p>
+    <h2>Next step: a pilot at one or two centres</h2>
+    <p class="lead" style="margin-top:12px">Let's talk for 20 minutes about how enquiries are handled at your centres today, and whether a pilot makes sense.</p>
+    <div class="contact">
+      <p class="name">Prasanna Kolare</p>
+      <p>WhatsApp or call: <a href="https://wa.me/917386463183">+91 73864 63183</a></p>
+      <p>Email: <a href="mailto:IamPrasannaKolare@gmail.com">IamPrasannaKolare@gmail.com</a></p>
+    </div>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#how">Back to how it works</a>
+      <a class="btn btn-primary" href="https://wa.me/917386463183">Book a 20-minute call</a>
       <a class="btn btn-ghost" href="/">Visit AwetomAItion</a>
     </div>
   </div>
