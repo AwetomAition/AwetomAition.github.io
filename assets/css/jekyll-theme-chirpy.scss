@@ -1,0 +1,132 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+
+/* ---------- AwetomAItion home intro ---------- */
+.aw-hero {
+  margin: 0.5rem 0 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--main-border-color);
+}
+
+.aw-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c2410c;
+  margin-bottom: 0.75rem;
+}
+
+html[data-mode='dark'] .aw-eyebrow {
+  color: #fb923c;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) .aw-eyebrow {
+    color: #fb923c;
+  }
+}
+
+.aw-title {
+  font-size: 2.1rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin: 0 0 1rem;
+}
+
+.aw-lead {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  max-width: 46rem;
+}
+
+.aw-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.aw-card {
+  border: 1px solid var(--main-border-color);
+  border-top: 3px solid #ea580c;
+  border-radius: 0.75rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--card-bg);
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted-color);
+  }
+}
+
+.aw-card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  color: var(--heading-color);
+}
+
+.aw-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.aw-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+.aw-btn-primary {
+  background: #ea580c;
+  color: #fff !important;
+
+  &:hover {
+    background: #c2410c;
+  }
+}
+
+.aw-btn-ghost {
+  border: 1.5px solid var(--heading-color) !important;
+  color: var(--heading-color) !important;
+}
+
+.aw-section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: var(--heading-color);
+}
+
+@media (max-width: 768px) {
+  .aw-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .aw-title {
+    font-size: 1.6rem;
+  }
+}
