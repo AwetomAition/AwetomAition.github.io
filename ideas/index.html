@@ -657,7 +657,7 @@ try{var l=localStorage.getItem('ideasLang');if(l==='hi'||l==='te')document.docum
 
 <section class="who" aria-label="Who I am">
   <div class="wrap">
-    <div class="avatar" aria-hidden="true"><span>PK</span><img src="/images/prasanna.jpg" alt="" width="84" height="84" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="avatar" id="avatar" aria-hidden="true"><span>PK</span></div>
     <div>
       <h2>Prasanna Kolare, Hyderabad</h2>
       <p>I built a working enquiry system for a multi-centre preschool chain. <a href="/demo/">See it in action.</a></p>
@@ -693,6 +693,13 @@ try{var l=localStorage.getItem('ideasLang');if(l==='hi'||l==='te')document.docum
   var count = document.getElementById('count');
   var chips = document.querySelectorAll('#filters .chip');
   var langs = document.querySelectorAll('#langbar .lang');
+  // Load the photo only if it exists, so a missing file never breaks anything.
+  var av = document.getElementById('avatar');
+  if (av) {
+    var photo = new Image();
+    photo.onload = function () { photo.alt = ''; av.appendChild(photo); };
+    photo.src = '/images/prasanna.jpg';
+  }
   if (!tiles.length) return;
 
   function filter(key) {
