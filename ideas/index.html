@@ -1,0 +1,602 @@
+---
+layout: null
+permalink: /ideas/
+sitemap: false
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Automation ideas by industry · AwetomAItion</title>
+<meta name="description" content="Ideas for automating everyday work, by industry: practical examples for schools, clinics, real estate, shops, accountants, restaurants and any business.">
+<link rel="icon" href="/assets/img/favicons/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&family=Noto+Sans+Telugu:wght@400;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1C1917; --ink-2:#44403C; --muted:#57534E; --line:#E7E5E4; --bg:#FFFFFF; --soft:#FAFAF9; --warm:#FFF7ED;
+  --orange:#EA580C; --orange-d:#C2410C;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+h1,h2,h3{font-family:Sora,Inter,sans-serif;letter-spacing:-0.02em;line-height:1.2;margin:0}
+p{margin:0}
+a{color:var(--orange-d)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange-d);margin-bottom:14px}
+.lead{font-size:18px;color:var(--ink-2);max-width:720px}
+
+/* top bar (same as the demo page) */
+.top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-family:Sora,sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.03em}
+.brand b{color:var(--orange)}
+.top-cta{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:10px;background:var(--orange);color:#fff;font-weight:600;font-size:13px;text-decoration:none;white-space:nowrap}
+.top-cta:hover{background:var(--orange-d)}
+
+/* hero */
+.hero{padding:48px 0 24px;background:linear-gradient(180deg,var(--warm),#fff 95%)}
+.hero h1{font-size:34px;max-width:820px;margin-bottom:12px}
+.hero h1 span{color:var(--orange)}
+
+/* industry buttons and language switch: shown only when JavaScript is ready */
+.filters,.langbar{display:none}
+.js .filters{display:grid}
+.js .langbar{display:flex}
+.filters{grid-template-columns:repeat(2,1fr);gap:10px;margin:24px 0 0}
+.chip{font:inherit;font-size:15px;font-weight:600;min-height:64px;padding:10px 12px;border-radius:14px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:10px;text-align:left;line-height:1.25}
+.chip svg{flex:none;width:28px;height:28px;stroke:var(--orange-d);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.chip:hover{border-color:var(--orange)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip[aria-pressed="true"] svg{stroke:#FDBA74}
+.chip:focus-visible,.lang:focus-visible,.tile summary:focus-visible,.tile-link:focus-visible,.btn:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+
+.langbar{align-items:center;flex-wrap:wrap;gap:10px;margin:22px 0 0}
+.langbar .lbl{font-size:14px;color:var(--muted)}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.lang{font:inherit;font-size:15px;font-weight:600;min-height:48px;min-width:84px;padding:0 16px;border:0;background:#fff;color:var(--ink-2);cursor:pointer}
+.lang+.lang{border-left:1.5px solid var(--line)}
+.lang[aria-pressed="true"]{background:var(--ink);color:#fff}
+.lang[lang="hi"]{font-family:"Noto Sans Devanagari","Nirmala UI",Mangal,system-ui,sans-serif}
+.lang[lang="te"]{font-family:"Noto Sans Telugu","Nirmala UI",Gautami,system-ui,sans-serif}
+
+.count{font-size:14px;color:var(--muted);margin:18px 0 0}
+.count:empty{display:none}
+
+/* tiles: one per row on phones, grid on wider screens */
+.tiles{display:grid;grid-template-columns:1fr;gap:12px;align-items:start;padding:20px 0 64px}
+.tile{border:1px solid var(--line);border-radius:16px;background:#fff}
+.tile[hidden]{display:none}
+.tile[open]{background:var(--soft);border-color:#D6D3D1}
+.tile summary{list-style:none;cursor:pointer;display:block;position:relative;min-height:72px;padding:18px 52px 18px 18px;border-radius:16px}
+.tile summary::-webkit-details-marker{display:none}
+.tile summary::after{content:"";position:absolute;right:20px;top:26px;width:10px;height:10px;border-right:2.5px solid var(--orange-d);border-bottom:2.5px solid var(--orange-d);transform:rotate(45deg);transition:transform .15s}
+.tile[open] summary::after{transform:rotate(-135deg);top:30px}
+.front{display:block}
+.front .q{display:block;font-size:17px;font-weight:700;line-height:1.35;color:var(--ink)}
+.front .o{display:block;margin-top:6px;font-size:15px;color:var(--ink-2)}
+/* language: English by default, so everything works without JavaScript */
+.l-hi,.l-te{display:none}
+html[data-lang="hi"] .l-en,html[data-lang="te"] .l-en{display:none}
+html[data-lang="hi"] .l-hi,html[data-lang="te"] .l-te{display:block}
+.l-hi{font-family:"Noto Sans Devanagari","Nirmala UI",Mangal,"Kohinoor Devanagari",system-ui,sans-serif}
+.l-te{font-family:"Noto Sans Telugu","Nirmala UI",Gautami,"Kohinoor Telugu",system-ui,sans-serif;line-height:1.8}
+
+.more{padding:0 18px 20px;border-top:1px solid var(--line)}
+.more dl{margin:16px 0 0;display:grid;gap:14px}
+.more dt{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.more dd{margin:2px 0 0;font-size:15px;color:var(--ink-2)}
+.tile-link{margin-top:14px;font-weight:600;font-size:15px;display:inline-flex;align-items:center;gap:6px;min-height:44px}
+
+/* closing */
+.closing{background:var(--ink);color:#fff;padding:64px 0}
+.closing h2{font-size:28px;color:#fff}
+.contact{margin-top:24px;display:grid;gap:10px;font-size:17px}
+.contact a{color:#FDBA74}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:12px 22px;border-radius:12px;font-weight:600;font-size:16px;text-decoration:none;background:var(--orange);color:#fff}
+.btn:hover{background:var(--orange-d)}
+footer{padding:28px 0;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media (min-width:700px){
+  body{font-size:17px}
+  .wrap{padding:0 24px}
+  .hero{padding:72px 0 32px}
+  .hero h1{font-size:46px}
+  .brand{font-size:20px;gap:10px}
+  .top-cta{font-size:14px;padding:0 16px}
+  .filters{grid-template-columns:repeat(4,1fr)}
+  .tiles{grid-template-columns:repeat(2,1fr);gap:16px}
+  .closing h2{font-size:34px}
+}
+@media (min-width:1000px){
+  .tiles{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+<script>
+document.documentElement.className+=' js';
+try{var l=localStorage.getItem('ideasLang');if(l==='hi'||l==='te')document.documentElement.setAttribute('data-lang',l)}catch(e){}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="AwetomAItion home">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 5 L55.4 18.5 L55.4 45.5 L32 59 L8.6 45.5 L8.6 18.5 Z" fill="none" stroke="#1C1917" stroke-width="5" stroke-linejoin="round"/><path d="M32 17 Q34 30 47 32 Q34 34 32 47 Q30 34 17 32 Q30 30 32 17 Z" fill="#EA580C"/></svg>
+      <span>Awetom<b>AI</b>tion</span>
+    </a>
+    <a class="top-cta" href="https://wa.me/917386463183">Book a 20-minute call</a>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Automation ideas</p>
+    <h1>What's your <span>business?</span></h1>
+    <p class="lead">Ideas for automating everyday work, by industry.</p>
+    <div class="filters" id="filters" role="group" aria-label="Choose your business">
+      <button type="button" class="chip" data-filter="all" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>All</span></button>
+      <button type="button" class="chip" data-filter="schools" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c3 2.4 9 2.4 12 0v-4.5"/><path d="M22 9v5"/></svg><span>Schools</span></button>
+      <button type="button" class="chip" data-filter="clinics" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg><span>Clinics</span></button>
+      <button type="button" class="chip" data-filter="realestate" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg><span>Real estate</span></button>
+      <button type="button" class="chip" data-filter="retail" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 016 0"/></svg><span>Shops &amp; distributors</span></button>
+      <button type="button" class="chip" data-filter="accountants" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg><span>Accountants</span></button>
+      <button type="button" class="chip" data-filter="restaurants" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 3v5a2 2 0 004 0V3"/><path d="M7 10v11"/><path d="M17 3c-2.2 1.8-2.6 6.2 0 8v10"/></svg><span>Restaurants</span></button>
+      <button type="button" class="chip" data-filter="any" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2"/><path d="M3 13h18"/></svg><span>Any business</span></button>
+    </div>
+    <div class="langbar" id="langbar" role="group" aria-label="Language of the idea cards">
+      <span class="lbl">Show cards in:</span>
+      <div class="seg">
+        <button type="button" class="lang" data-lang="en" lang="en" aria-pressed="true">English</button>
+        <button type="button" class="lang" data-lang="hi" lang="hi" aria-pressed="false">हिंदी</button>
+        <button type="button" class="lang" data-lang="te" lang="te" aria-pressed="false">తెలుగు</button>
+      </div>
+    </div>
+    <p class="count" id="count" aria-live="polite"></p>
+  </div>
+</section>
+
+<section aria-label="Automation ideas">
+  <div class="wrap">
+    <div class="tiles" id="tiles">
+      <details class="tile" data-industry="schools">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Parents enquire, but does anyone call back?</strong><span class="o">Every enquiry gets an instant reply, and nobody forgets to call.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">अभिभावक पूछताछ करते हैं, पर क्या कोई वापस फ़ोन करता है?</strong><span class="o">हर पूछताछ का तुरंत जवाब, और फ़ोन करना कोई नहीं भूलता।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">తల్లిదండ్రులు విచారిస్తారు, కానీ ఎవరైనా తిరిగి ఫోన్ చేస్తున్నారా?</strong><span class="o">ప్రతి విచారణకు వెంటనే జవాబు, ఫోన్ చేయడం ఎవరూ మరవరు.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>A parent fills in the website form, and someone has to notice it, then remember to call back.</dd></div>
+          <div><dt>Automated</dt><dd>The parent gets a reply within a minute with the school's address and map; the centre is alerted; untouched enquiries are escalated to the principal.</dd></div>
+          <div><dt>Value</dt><dd>Fewer lost admissions, and parents feel looked after from the first minute.</dd></div>
+          <div><dt>Works with</dt><dd>Your website enquiry form, your email.</dd></div>
+        </dl>
+        <a class="tile-link" href="/demo/">See the working demo <span aria-hidden="true">→</span></a>
+      </div>
+      </details>
+      <details class="tile" data-industry="schools">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Still chasing parents for unpaid fees?</strong><span class="o">Reminders go out on their own; you get a weekly list of who's pending.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">अब भी बकाया फीस के लिए अभिभावकों के पीछे पड़ते हैं?</strong><span class="o">रिमाइंडर अपने आप जाते हैं, हर हफ़्ते बकाया लिस्ट आपके पास।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">ఇంకా బకాయి ఫీజుల కోసం తల్లిదండ్రుల వెంట పడుతున్నారా?</strong><span class="o">రిమైండర్లు వాటంతట అవే వెళ్తాయి, ప్రతి వారం బకాయి జాబితా మీకు.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Someone checks the fee register for unpaid fees and messages each parent one by one.</dd></div>
+          <div><dt>Automated</dt><dd>Parents with overdue fees get a polite reminder on a fixed schedule, and the owner gets a weekly list of who's still pending.</dd></div>
+          <div><dt>Value</dt><dd>Fees come in sooner, and nobody spends evenings chasing.</dd></div>
+          <div><dt>Works with</dt><dd>Your fee register in Excel, or a report from your school app; your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="schools">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Waiting weeks for admission documents?</strong><span class="o">Parents upload them online and get reminders until the file is complete.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">एडमिशन दस्तावेज़ों का हफ़्तों इंतज़ार?</strong><span class="o">अभिभावक ऑनलाइन अपलोड करते हैं, फ़ाइल पूरी होने तक रिमाइंडर जाते हैं।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">అడ్మిషన్ పత్రాల కోసం వారాల తరబడి ఎదురుచూపా?</strong><span class="o">తల్లిదండ్రులు ఆన్‌లైన్‌లో అప్‌లోడ్ చేస్తారు, ఫైల్ పూర్తయ్యే వరకు రిమైండర్లు వెళ్తాయి.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Staff keep a paper list of which parent still owes a birth certificate or vaccination card, and keep reminding them.</dd></div>
+          <div><dt>Automated</dt><dd>Each new admission gets a checklist; parents upload documents through a simple form and get reminders for anything missing.</dd></div>
+          <div><dt>Value</dt><dd>Complete files before the child starts, with no follow-up calls.</dd></div>
+          <div><dt>Works with</dt><dd>An online form, your email, a shared folder.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="schools">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Do some parent complaints get forgotten?</strong><span class="o">Every complaint reaches the right person, with a reply deadline.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">क्या अभिभावकों की कुछ शिकायतें भूल जाती हैं?</strong><span class="o">हर शिकायत सही व्यक्ति तक, जवाब की समय-सीमा के साथ।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">తల్లిదండ్రుల కొన్ని ఫిర్యాదులు మర్చిపోతున్నారా?</strong><span class="o">ప్రతి ఫిర్యాదు సరైన వ్యక్తికి, జవాబుకు గడువుతో.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Complaints arrive by phone, email or at the gate, and some get forgotten.</dd></div>
+          <div><dt>Automated</dt><dd>Parents use one form; each complaint goes to the right person by topic and branch, with a reply deadline and a reminder if it's missed.</dd></div>
+          <div><dt>Value</dt><dd>No complaint slips through, and management sees patterns early.</dd></div>
+          <div><dt>Works with</dt><dd>An online form, your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="clinics">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Patients missing appointments?</strong><span class="o">Everyone gets a reminder the day before, with the time and a map.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">मरीज़ अपॉइंटमेंट पर नहीं आते?</strong><span class="o">सबको एक दिन पहले समय और नक्शे के साथ रिमाइंडर।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">పేషెంట్లు అపాయింట్‌మెంట్‌కు రావడం లేదా?</strong><span class="o">అందరికీ ఒక రోజు ముందే సమయం, మ్యాప్‌తో రిమైండర్.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>The front desk calls patients the day before, or doesn't, and some don't turn up.</dd></div>
+          <div><dt>Automated</dt><dd>Every patient gets a reminder the day before with the time, address and a map link, and a way to say they can't come.</dd></div>
+          <div><dt>Value</dt><dd>Fewer no-shows, and empty slots can be offered to others.</dd></div>
+          <div><dt>Works with</dt><dd>Your appointment calendar or booking sheet, your email; can also be sent on WhatsApp.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="clinics">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Patients calling again and again about reports?</strong><span class="o">They're told automatically the moment the report is ready.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">रिपोर्ट के लिए मरीज़ बार-बार फ़ोन करते हैं?</strong><span class="o">रिपोर्ट तैयार होते ही उन्हें अपने आप सूचना।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">రిపోర్ట్ కోసం పేషెంట్లు మళ్లీ మళ్లీ ఫోన్ చేస్తున్నారా?</strong><span class="o">రిపోర్ట్ సిద్ధమవగానే వారికి ఆటోమేటిక్‌గా సమాచారం.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Patients call again and again to ask if their report is ready, or staff call each one.</dd></div>
+          <div><dt>Automated</dt><dd>When a report is saved to the reports folder, the patient is told it's ready, with collection timings.</dd></div>
+          <div><dt>Value</dt><dd>Fewer phone calls for the desk, and patients don't have to keep asking.</dd></div>
+          <div><dt>Works with</dt><dd>The folder where reports are saved, your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="clinics">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Hearing about problems only from bad reviews?</strong><span class="o">Unhappy patients are flagged to you the same day.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">समस्याओं का पता सिर्फ़ बुरे रिव्यू से चलता है?</strong><span class="o">नाराज़ मरीज़ों की जानकारी उसी दिन आपको।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">సమస్యలు చెడు రివ్యూల ద్వారానే తెలుస్తున్నాయా?</strong><span class="o">అసంతృప్త పేషెంట్ల సమాచారం అదే రోజు మీకు.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Feedback comes only when someone is upset enough to complain, or post a bad review.</dd></div>
+          <div><dt>Automated</dt><dd>After each visit, patients get a two-question form; low scores alert the manager the same day.</dd></div>
+          <div><dt>Value</dt><dd>Problems are fixed before they turn into bad reviews, and happy patients can be invited to leave one.</dd></div>
+          <div><dt>Works with</dt><dd>Your patient list or appointment sheet, your email, an online form.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="realestate">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Portal leads lost before anyone calls?</strong><span class="o">Every enquiry is logged, answered instantly and tracked until the site visit.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">पोर्टल की लीड्स फ़ोन से पहले ही खो जाती हैं?</strong><span class="o">हर पूछताछ दर्ज, तुरंत जवाब, साइट विज़िट तक ट्रैक।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">పోర్టల్ లీడ్స్ ఫోన్ చేసేలోపే పోతున్నాయా?</strong><span class="o">ప్రతి విచారణ నమోదు, వెంటనే జవాబు, సైట్ విజిట్ వరకు ట్రాక్.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Enquiries arrive from the website and property portals by email, and get copied into a sheet by hand, if someone has time.</dd></div>
+          <div><dt>Automated</dt><dd>Every enquiry is logged in one list, the buyer gets an instant reply with the project brochure, and untouched leads are flagged to the sales head.</dd></div>
+          <div><dt>Value</dt><dd>No lead is lost between the portals and the sales team, and you can see which source brings real buyers.</dd></div>
+          <div><dt>Works with</dt><dd>Enquiry emails from your website and property portals, Excel, your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="realestate">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Calling buyers every time an instalment is due?</strong><span class="o">Reminders go before each due date, and you see who's overdue.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">हर किस्त पर खरीदारों को फ़ोन करते हैं?</strong><span class="o">हर तारीख से पहले रिमाइंडर, बकाया लोगों की लिस्ट आपके पास।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">ప్రతి వాయిదాకు కొనుగోలుదారులకు ఫోన్ చేస్తున్నారా?</strong><span class="o">ప్రతి గడువుకు ముందే రిమైండర్, బకాయిదారుల జాబితా మీకు.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>The accounts team checks the payment schedule sheet and calls buyers when an instalment is due.</dd></div>
+          <div><dt>Automated</dt><dd>Buyers get a reminder before each due date with the amount and payment details, and accounts gets a weekly list of overdue payments.</dd></div>
+          <div><dt>Value</dt><dd>Payments arrive on time more often, and fewer awkward follow-up calls.</dd></div>
+          <div><dt>Works with</dt><dd>Your payment schedule in Excel, your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="realestate">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Forwarding leads to salespeople by hand?</strong><span class="o">Leads go to the next person in turn, and you see who has how many.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">सेल्स टीम को लीड्स हाथ से भेजते हैं?</strong><span class="o">लीड्स बारी-बारी से अपने आप, किसके पास कितनी, सब दिखता है।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">సేల్స్ టీమ్‌కు లీడ్స్ చేత్తో పంపుతున్నారా?</strong><span class="o">లీడ్స్ వరుసగా ఆటోమేటిక్‌గా, ఎవరి దగ్గర ఎన్ని ఉన్నాయో కనిపిస్తుంది.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>The manager forwards leads to salespeople one by one, and some get more than others.</dd></div>
+          <div><dt>Automated</dt><dd>Each new lead goes to the next salesperson in turn, or by project or area, and the manager sees who has how many.</dd></div>
+          <div><dt>Value</dt><dd>Faster first calls, fair workloads, and clear accountability.</dd></div>
+          <div><dt>Works with</dt><dd>Your enquiry emails or form, Excel, your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="retail">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Finding out stock is over when a customer asks?</strong><span class="o">Every morning, a list of what's running low.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">माल ख़त्म होने का पता ग्राहक के मांगने पर चलता है?</strong><span class="o">हर सुबह, कम होते माल की लिस्ट।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">సరుకు అయిపోయిందని కస్టమర్ అడిగినప్పుడే తెలుస్తోందా?</strong><span class="o">ప్రతి ఉదయం, తగ్గుతున్న సరుకుల జాబితా.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Someone walks the shelves or scrolls the stock sheet to see what's running low, often after a customer has already been turned away.</dd></div>
+          <div><dt>Automated</dt><dd>Every morning, a list of items below their minimum level is emailed to whoever places orders.</dd></div>
+          <div><dt>Value</dt><dd>Fewer lost sales from empty shelves, and less over-ordering in a panic.</dd></div>
+          <div><dt>Works with</dt><dd>Your stock sheet in Excel or Google Sheets, or a stock report from your billing software; your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="retail">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Calling every branch at night for sales figures?</strong><span class="o">One summary email every night, covering all branches.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">बिक्री जानने के लिए हर रात हर ब्रांच को फ़ोन?</strong><span class="o">हर रात एक ईमेल में सभी ब्रांच की बिक्री।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">అమ్మకాల కోసం ప్రతి రాత్రి ప్రతి బ్రాంచ్‌కు ఫోనా?</strong><span class="o">ప్రతి రాత్రి ఒకే ఈమెయిల్‌లో అన్ని బ్రాంచ్‌ల అమ్మకాలు.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>The owner calls each branch or counter in the evening to ask how sales went.</dd></div>
+          <div><dt>Automated</dt><dd>Each night, the owner gets one email with sales by branch, compared with the same day last week.</dd></div>
+          <div><dt>Value</dt><dd>The owner knows the numbers without calling anyone, and spots a bad day the same evening.</dd></div>
+          <div><dt>Works with</dt><dd>The daily sales report from your billing software, or Tally reports exported to Excel; your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="retail">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Orders on calls, emails and messages, and some missed?</strong><span class="o">One order form; every order confirmed and logged.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">फ़ोन, ईमेल और मैसेज पर ऑर्डर, कुछ छूट जाते हैं?</strong><span class="o">एक ऑर्डर फ़ॉर्म, हर ऑर्डर की पुष्टि और रिकॉर्ड।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">ఫోన్, ఈమెయిల్, మెసేజ్‌లలో ఆర్డర్లు, కొన్ని మిస్ అవుతున్నాయా?</strong><span class="o">ఒకే ఆర్డర్ ఫారం, ప్రతి ఆర్డర్‌కు నిర్ధారణ, రికార్డ్.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Orders from retailers come by phone, email and message, and are noted in a book or sheet; some get missed or entered twice.</dd></div>
+          <div><dt>Automated</dt><dd>Retailers order through one form or email; each order is logged with a number, the retailer gets a confirmation, and the dispatch team gets the list.</dd></div>
+          <div><dt>Value</dt><dd>No missed orders, no disputes about what was ordered, and a clear record for billing.</dd></div>
+          <div><dt>Works with</dt><dd>An online order form or your email, Excel.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="accountants">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Chasing clients for documents every month?</strong><span class="o">Requests and reminders go out on their own, and you see who's pending.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">हर महीने क्लाइंट्स से दस्तावेज़ मांगते रहते हैं?</strong><span class="o">अनुरोध और रिमाइंडर अपने आप, बाकी कौन है, सब दिखता है।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">ప్రతి నెలా క్లయింట్ల నుంచి పత్రాల కోసం వెంటపడుతున్నారా?</strong><span class="o">అభ్యర్థనలు, రిమైండర్లు వాటంతట అవే, ఎవరు బాకీ ఉన్నారో కనిపిస్తుంది.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Every month, staff message each client for bank statements, sales bills and purchase bills, then chase the ones who haven't sent them.</dd></div>
+          <div><dt>Automated</dt><dd>Each client gets a monthly request with an upload link; reminders go out until their documents arrive, and you see who's still pending in one list.</dd></div>
+          <div><dt>Value</dt><dd>Staff stop chasing, work starts on time, and late clients are visible early.</dd></div>
+          <div><dt>Works with</dt><dd>Your client list in Excel, your email, a shared folder for uploads.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="accountants">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Filing dates kept in someone's head?</strong><span class="o">Staff are reminded before every due date, for every client.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">फ़ाइलिंग की तारीखें किसी के दिमाग में ही रहती हैं?</strong><span class="o">हर क्लाइंट की हर तारीख से पहले स्टाफ़ को रिमाइंडर।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">ఫైలింగ్ గడువులు ఎవరో ఒకరి జ్ఞాపకంలోనేనా?</strong><span class="o">ప్రతి క్లయింట్ ప్రతి గడువుకు ముందే సిబ్బందికి రిమైండర్.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Due dates for GST, TDS and other filings live in someone's head or a wall calendar, across dozens of clients.</dd></div>
+          <div><dt>Automated</dt><dd>From your client-and-due-date sheet, staff get a reminder a few days before each filing, and the partner gets a weekly view of what's due and what's done.</dd></div>
+          <div><dt>Value</dt><dd>Fewer late filings and penalties for clients, and less last-minute rush.</dd></div>
+          <div><dt>Works with</dt><dd>Your compliance calendar in Excel, your email, Outlook calendar.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="accountants">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Clients calling to ask, &quot;Is my work done?&quot;</strong><span class="o">They get an update automatically when it is.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">क्लाइंट फ़ोन करके पूछते हैं, &quot;मेरा काम हुआ?&quot;</strong><span class="o">काम पूरा होते ही उन्हें अपने आप सूचना।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">క్లయింట్లు ఫోన్ చేసి &quot;నా పని అయిందా?&quot; అని అడుగుతున్నారా?</strong><span class="o">పని పూర్తవగానే వారికి ఆటోమేటిక్‌గా సమాచారం.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Clients call to ask &quot;is my return filed?&quot;, and staff stop work to check and reply.</dd></div>
+          <div><dt>Automated</dt><dd>When staff mark a task as done in the work tracker, the client automatically gets an email saying what was completed.</dd></div>
+          <div><dt>Value</dt><dd>Fewer status calls, and clients feel informed without anyone writing an email.</dd></div>
+          <div><dt>Works with</dt><dd>Your work tracker in Excel or a shared list, your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="restaurants">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Party bookings going elsewhere because you replied late?</strong><span class="o">An instant reply with menus and packages; the manager is reminded to call.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">देर से जवाब के कारण पार्टी बुकिंग कहीं और चली जाती है?</strong><span class="o">मेन्यू और पैकेज के साथ तुरंत जवाब, मैनेजर को फ़ोन का रिमाइंडर।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">ఆలస్యంగా జవాబిచ్చినందుకు పార్టీ బుకింగ్ వేరే చోటికి వెళ్తోందా?</strong><span class="o">మెనూ, ప్యాకేజీలతో వెంటనే జవాబు, మేనేజర్‌కు ఫోన్ రిమైండర్.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Birthday and office-party enquiries come in while the manager is busy on the floor, and the customer books somewhere else.</dd></div>
+          <div><dt>Automated</dt><dd>The customer gets an instant reply with party menus and packages, and the manager gets the details with a reminder to call.</dd></div>
+          <div><dt>Value</dt><dd>More bookings from the same enquiries, and fewer lost to slow replies.</dd></div>
+          <div><dt>Works with</dt><dd>Your website or booking form, your email, your party menu as a PDF.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="restaurants">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Paper bills piling up for your signature?</strong><span class="o">Staff photograph the bills; you approve from your phone.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">आपके हस्ताक्षर के लिए काग़ज़ी बिलों का ढेर?</strong><span class="o">स्टाफ़ बिल की फ़ोटो भेजता है, आप फ़ोन से मंज़ूर करते हैं।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">మీ సంతకం కోసం కాగితపు బిల్లుల కుప్పలా?</strong><span class="o">సిబ్బంది బిల్లుల ఫోటో పంపుతారు, మీరు ఫోన్‌లోనే ఆమోదిస్తారు.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Paper bills from vegetable, meat and gas suppliers pile up, wait for the owner's signature, and sometimes get lost or paid twice.</dd></div>
+          <div><dt>Automated</dt><dd>Staff photograph each bill into a simple form; the owner approves or rejects from an email; approved bills are logged for payment.</dd></div>
+          <div><dt>Value</dt><dd>Nothing paid twice or missed, and the owner approves from anywhere.</dd></div>
+          <div><dt>Works with</dt><dd>Your phone camera, an online form, your email, Excel.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="restaurants">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Closing figures sent as a photo of a notebook?</strong><span class="o">A two-minute closing form, and a clean summary to you every night.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">क्लोज़िंग का हिसाब नोटबुक की फ़ोटो से आता है?</strong><span class="o">दो मिनट का क्लोज़िंग फ़ॉर्म, हर रात साफ़ सारांश आपके पास।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">క్లోజింగ్ లెక్కలు నోట్‌బుక్ ఫోటోగా వస్తున్నాయా?</strong><span class="o">రెండు నిమిషాల క్లోజింగ్ ఫారం, ప్రతి రాత్రి స్పష్టమైన సారాంశం మీకు.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>At closing, the manager writes totals on paper or sends a photo, and the owner pieces it together later.</dd></div>
+          <div><dt>Automated</dt><dd>The manager fills a two-minute closing form (cash, card, UPI, wastage, issues); the owner gets a clean summary that night and a weekly comparison.</dd></div>
+          <div><dt>Value</dt><dd>The owner sees every outlet's day without calling, and cash gaps show up immediately.</dd></div>
+          <div><dt>Works with</dt><dd>An online form on the manager's phone, your email, Excel.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="any">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Leave asked for in the corridor, then forgotten?</strong><span class="o">Apply on a form, approve in one click, and see it on the calendar.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">छुट्टी गलियारे में मांगी और भूल गए?</strong><span class="o">फ़ॉर्म पर अर्ज़ी, एक क्लिक में मंज़ूरी, कैलेंडर पर दिखती है।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">సెలవు మాటల్లోనే అడిగి మర్చిపోతున్నారా?</strong><span class="o">ఫారంలో దరఖాస్తు, ఒక్క క్లిక్‌తో ఆమోదం, క్యాలెండర్‌లో కనిపిస్తుంది.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Leave is asked for on paper, by message or in the corridor, and nobody is sure who's off next week.</dd></div>
+          <div><dt>Automated</dt><dd>Staff apply through a short form, the manager approves from an email, and approved leave appears on a shared team calendar.</dd></div>
+          <div><dt>Value</dt><dd>No lost requests, and planning cover becomes easy.</dd></div>
+          <div><dt>Works with</dt><dd>An online form, your email, Outlook or Google calendar.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="any">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">New joiners waiting days for an ID card or email?</strong><span class="o">A checklist with owners and reminders starts the moment they join.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">नए कर्मचारी आईडी कार्ड या ईमेल के लिए दिनों इंतज़ार करते हैं?</strong><span class="o">जॉइन करते ही ज़िम्मेदारों और रिमाइंडर वाली चेकलिस्ट शुरू।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">కొత్త ఉద్యోగులు ఐడీ కార్డ్ లేదా ఈమెయిల్ కోసం రోజులు ఎదురుచూస్తున్నారా?</strong><span class="o">చేరిన వెంటనే బాధ్యులు, రిమైండర్లతో చెక్‌లిస్ట్ మొదలు.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>When someone joins, the ID card, documents, email account and first-week plan depend on who remembers what.</dd></div>
+          <div><dt>Automated</dt><dd>Adding a new joiner creates a checklist with an owner and due date for each task, and reminders go out until everything's done.</dd></div>
+          <div><dt>Value</dt><dd>New staff feel welcome from day one, and nothing is forgotten.</dd></div>
+          <div><dt>Works with</dt><dd>An online form, your email, a shared task list.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="any">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Expense bills lost in wallets until month-end?</strong><span class="o">Snap the bill, the manager approves, and accounts gets one clean list.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">खर्च के बिल महीने के अंत तक बटुए में खो जाते हैं?</strong><span class="o">बिल की फ़ोटो, मैनेजर की मंज़ूरी, अकाउंट्स को एक साफ़ लिस्ट।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">ఖర్చుల బిల్లులు నెలాఖరు వరకు పర్సుల్లోనే పోతున్నాయా?</strong><span class="o">బిల్లు ఫోటో, మేనేజర్ ఆమోదం, అకౌంట్స్‌కు ఒకే జాబితా.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Staff keep paper bills in their wallets, submit them at month end, and accounts chases missing ones.</dd></div>
+          <div><dt>Automated</dt><dd>Staff submit each expense with a photo as it happens; the manager approves by email; accounts gets one clean list for reimbursement.</dd></div>
+          <div><dt>Value</dt><dd>Faster reimbursements, no lost bills, and a record of who approved what.</dd></div>
+          <div><dt>Works with</dt><dd>Your phone camera, an online form, your email, Excel.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="any">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Licences and contracts expiring without notice?</strong><span class="o">Reminders 60, 30 and 7 days before every renewal.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">लाइसेंस और कॉन्ट्रैक्ट बिना पता चले ख़त्म हो जाते हैं?</strong><span class="o">हर रिन्यूअल से 60, 30 और 7 दिन पहले रिमाइंडर।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">లైసెన్సులు, ఒప్పందాలు తెలియకుండానే గడువు దాటుతున్నాయా?</strong><span class="o">ప్రతి రెన్యువల్‌కు 60, 30, 7 రోజుల ముందే రిమైండర్లు.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>Trade licences, fire certificates, insurance and maintenance contracts expire unnoticed, and someone finds out when there's a problem.</dd></div>
+          <div><dt>Automated</dt><dd>From one list of documents and expiry dates, the right person gets reminders 60, 30 and 7 days before each renewal.</dd></div>
+          <div><dt>Value</dt><dd>No lapsed licences, fines or surprise breakdowns because an AMC ran out.</dd></div>
+          <div><dt>Works with</dt><dd>Your renewals list in Excel, your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+      <details class="tile" data-industry="any">
+      <summary>
+        <span class="front l-en" lang="en"><strong class="q">Unhappy customers leaving without telling you?</strong><span class="o">Low feedback scores reach you the same day.</span></span>
+        <span class="front l-hi" lang="hi"><strong class="q">नाराज़ ग्राहक बिना बताए चले जाते हैं?</strong><span class="o">कम रेटिंग की जानकारी उसी दिन आपको।</span></span>
+        <span class="front l-te" lang="te"><strong class="q">అసంతృప్త కస్టమర్లు చెప్పకుండానే వెళ్లిపోతున్నారా?</strong><span class="o">తక్కువ రేటింగ్ సమాచారం అదే రోజు మీకు.</span></span>
+      </summary>
+      <div class="more" lang="en">
+        <dl>
+          <div><dt>Today</dt><dd>You hear about an unhappy customer only when they've already left, or posted a bad review.</dd></div>
+          <div><dt>Automated</dt><dd>Customers get a one-minute feedback form after a purchase or service; any low score alerts the owner the same day with the customer's details.</dd></div>
+          <div><dt>Value</dt><dd>You can call and fix it while it still matters, and spot repeated problems.</dd></div>
+          <div><dt>Works with</dt><dd>An online form or a QR code at the counter, your email.</dd></div>
+        </dl>
+      </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>Seen something like your business? Let's talk.</h2>
+    <div class="contact">
+      <p>WhatsApp or call: <a href="https://wa.me/917386463183">+91 73864 63183</a></p>
+      <p>Email: <a href="mailto:IamPrasannaKolare@gmail.com">IamPrasannaKolare@gmail.com</a></p>
+    </div>
+    <div class="cta-row">
+      <a class="btn" href="https://wa.me/917386463183">WhatsApp me</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© AwetomAItion · Practical AI and automation</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var tiles = document.querySelectorAll('#tiles .tile');
+  var count = document.getElementById('count');
+  var chips = document.querySelectorAll('#filters .chip');
+  var langs = document.querySelectorAll('#langbar .lang');
+  if (!tiles.length) return;
+
+  function filter(key) {
+    var shown = 0;
+    tiles.forEach(function (t) {
+      var match = key === 'all' || t.getAttribute('data-industry') === key;
+      t.hidden = !match;
+      if (match) shown++;
+    });
+    chips.forEach(function (c) {
+      c.setAttribute('aria-pressed', c.getAttribute('data-filter') === key ? 'true' : 'false');
+    });
+    count.textContent = 'Showing ' + shown + (shown === 1 ? ' idea' : ' ideas');
+  }
+
+  function setLang(code, save) {
+    if (code === 'en') root.removeAttribute('data-lang'); else root.setAttribute('data-lang', code);
+    langs.forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-lang') === code ? 'true' : 'false');
+    });
+    if (save) { try { localStorage.setItem('ideasLang', code); } catch (e) {} }
+  }
+
+  document.getElementById('filters').addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (chip) filter(chip.getAttribute('data-filter'));
+  });
+  document.getElementById('langbar').addEventListener('click', function (e) {
+    var b = e.target.closest('.lang');
+    if (b) setLang(b.getAttribute('data-lang'), true);
+  });
+
+  var saved = 'en';
+  try { saved = localStorage.getItem('ideasLang') || 'en'; } catch (e) {}
+  setLang(saved === 'hi' || saved === 'te' ? saved : 'en', false);
+  filter('all');
+})();
+</script>
+</body>
+</html>
